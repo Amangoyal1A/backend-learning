@@ -2,8 +2,11 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const userModel = require('./models/userModel')
+const cookieParser = require('cookie-parser')
 
 app.use(express.json());
+app.use(cookieParser())
+
 const users = [
   { name: "Aarav", id: 1, age: 22 },
   { name: "Diya", id: 2, age: 27 },
@@ -24,6 +27,14 @@ userRouter
   .post(postUser)
   .patch(updateUser)
   .delete(deleteUser);
+
+  //cookies
+  userRouter.route('/getcookies')
+  .get(getCookies)
+
+  userRouter.route('/setcookies')
+  .get(setCookies)
+
 
 //final route for example localhost:3001/users/1
 userRouter.route("/:id").get(getuserbyid);
@@ -101,6 +112,21 @@ function updateUser(req, res) {
 function deleteUser(req, res) {
   users = {};
 }
+
+function getCookies(req,res)
+{
+
+}
+
+
+
+function setCookies(req,res)
+{
+res.cookie("isLoggedIn",true,{maxAge:1000*60*60*24,secure:true,httpOnly:true})
+res.send("cookie set ")
+}
+
+
 
 function middleware1(req, res, next) {
   console.log("middleware 1 encountred");
