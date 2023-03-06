@@ -81,4 +81,9 @@ async function loginUser(req, res) {
       });
     }
   }
-module.exports = authRouter;
+
+  module.exports = {
+authRouter,
+postSignup
+  }
+  
