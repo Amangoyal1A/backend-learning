@@ -19,11 +19,23 @@ class student{
 
     finalmarks(type){
 
-        let internal = this.internal(type);
-        let external = this.external(type);
+        let internal = this.getinternal(type);
+        let external = this.getexternal(type);
         let finalmark = internal + external
-
+return finalmark
     }
+
+    getinternal(type)
+    {
+        return type+1;
+    }
+
+
+    getexternal(type)
+    {
+        return type-1;
+    }
+
 
 }
 module.exports= student

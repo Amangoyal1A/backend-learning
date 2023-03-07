@@ -1,13 +1,17 @@
 const sinon = require("sinon");
-const Student = require("../IgnoreFiles/check");
+const student = require("../IgnoreFiles/check");
 
 describe("Student class", () => {
-  let student;
+  let studentobj = new student();
+  
 
-  beforeEach(() => {
-    student = new Student();
-  });
+  it("function argument check",function(){
+    var stub = sinon.stub(studentobj,'getexternal')
+    stub.withArgs(40).returns(5)
 
+    expect(studentobj.finalmarks(40)).toEqual(46);
+
+  })
 
 
 })
