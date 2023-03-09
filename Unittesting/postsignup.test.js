@@ -1,11 +1,11 @@
 const { postSignup } = require('../Controllers/authRouter');
 const userModel = require('../models/userModel');
-
+require('dotenv').config();
 const mongoose = require('mongoose');
 
 // Connect to the test database
 beforeAll(async () => {
-  await mongoose.connect('mongodb://localhost:27017', {
+  await mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,

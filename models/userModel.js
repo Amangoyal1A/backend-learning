@@ -1,10 +1,11 @@
 const emailValidator= require('email-validator')
 const mongoose = require("mongoose");
 const bcrypt= require("bcrypt")
+require('dotenv').config();
 
 
 mongoose
-  .connect("mongodb://localhost:27017")
+  .connect(process.env.MONGO_URL)
   .then(function (db) {
     console.log("db is connected");
   })

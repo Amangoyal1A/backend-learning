@@ -1,4 +1,5 @@
 const express = require("express");
+require('dotenv').config();
 const app = express();
 const userModel = require("../models/userModel");
 const authRouter = express.Router();
