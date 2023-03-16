@@ -38,15 +38,6 @@ const userSchema = mongoose.Schema({
       return this.password === this.confirmpassword;
     },
   },
-  role: {
-    type: String,
-    enum: ["admin", "user", "restaurantOwner", "deliveryBoy"],
-    default: "user",
-  },
-  ProfileImage: {
-    type: String,
-    default: "img/user/deafult.jpg",
-  },
 });
 
 //hooks in mongo
