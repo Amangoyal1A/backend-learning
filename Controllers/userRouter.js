@@ -1,13 +1,13 @@
 const express = require("express");
 const app = express();
-const jwt= require('jsonwebtoken')
+const jwt = require("jsonwebtoken");
 const userModel = require("../models/userModel");
 const cookieParser = require("cookie-parser");
 const userRouter = express.Router();
 app.use(cookieParser());
 userRouter
   .route("/")
-  .get(protectRoute,getUser)
+  .get(protectRoute, getUser)
   .post(postUser)
   .patch(updateUser)
   .delete(deleteUser);
@@ -30,9 +30,9 @@ const users = [
 
 async function getUser(req, res) {
   // console.log(req.query);
-res.send(users);
-//   let data = await userModel.find({ email: "zoop@gmail.com" });
-//   res.json({ message: "users", userdata: data });
+  res.send(users);
+  //   let data = await userModel.find({ email: "zoop@gmail.com" });
+  //   res.json({ message: "users", userdata: data });
 }
 function postUser(req, res) {
   console.log(req.body);
@@ -110,26 +110,25 @@ function setCookies(req, res) {
 }
 
 function protectRoute(req, res, next) {
-    const JWT_key = "eui34kh54";
-    const token = req.cookies.isLoggedIn;
-  
-    if (!token) {
-      return res.status(401).json({ message: "Access denied. No token provided." });
-    }
-  
-    try {
-      const decoded = jwt.verify(token, JWT_key);
-      req.user = decoded; // Store the decoded user object in the request object for future use
-      next();
-    } catch (ex) {
-      return res.status(400).json({ message: "Invalid token." });
-    }
-  }
-  
+  const JWT_key = "eui34kh54";
+  const token = req.cookies.isLoggedIn;
 
-
-  module.exports = {
-    userRouter,
-    getUser
+  if (!token) {
+    return res
+      .status(401)
+      .json({ message: "Access denied. No token provided." });
   }
-  
+
+  try {
+    const decoded = jwt.verify(token, JWT_key);
+    req.user = decoded; // Store the decoded user object in the request object for future use
+    next();
+  } catch (ex) {
+    return res.status(400).json({ message: "Invalid token." });
+  }
+}
+
+module.exports = {
+  userRouter,
+  getUser,
+};
